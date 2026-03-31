@@ -1,7 +1,7 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-    connectionString: postgresql://student_tasks_db_s201_user:2eMBsPNteJUcWIogjUGkvWCjiiYC7fVn@dpg-d75v92euk2gs73cb87ng-a.singapore-postgres.render.com/student_tasks_db_s201, // Use the link from Render
+    connectionString: postgresql//student_tasks_db_s201_user:2eMBsPNteJUcWIogjUGkvWCjiiYC7fVn@dpg-d75v92euk2gs73cb87ng-a.singapore-postgres.render.com/student_tasks_db_s201s
     ssl: {
         rejectUnauthorized: false
     }
