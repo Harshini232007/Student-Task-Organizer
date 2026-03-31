@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Task Organizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Student Task Organizer</h1>
+
+        <form action="/add-task" method="POST">
+            <input type="text" name="title" placeholder="Task Title (e.g. Homework)" required><br>
+            <input type="text" name="desc" placeholder="Description (e.g. Math Page 10)"><br>
+            <button type="submit">Add Task</button>
+        </form>
+
+        <hr>
+        <h3>Your Saved Tasks:</h3>
+        <ul id="taskList"></ul>
+    </div>
+    <script>
+        // This part talks to your server to get the tasks
+        async function fetchTasks() {
+            const response = await fetch('/tasks');
+            const tasks = await response.json();
+            const taskList = document.getElementById('taskList');
+            taskList.innerHTML = ''; // Clear the list before adding new ones
+
+            tasks.forEach(task => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                <div>
+                    <strong>${task.title}</strong><br>
+                    <small>${task.description}</small>
+                </div>
+                <form action="/delete-task" method="POST" style="display:inline;">
+                    <input type="hidden" name="id" value="${task.id}">
+                    <button type="submit" style="background-color: #ff4d4d; width: auto; padding: 5px 10px;">Delete</button>
+                </form>
+            `;
+                taskList.appendChild(li);
+            });
+        }
+
+        // Run this function as soon as the page loads
+        fetchTasks();
+    </script>
+</body>
+
+</html>
