@@ -58,3 +58,6 @@ app.post('/delete-task', (req, res) => {
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
