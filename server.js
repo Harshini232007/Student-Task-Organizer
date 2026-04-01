@@ -40,9 +40,11 @@ app.get('/tasks', (req, res) => {
 });
 
 app.post('/add-task', (req, res) => {
-    const { title, desc } = req.body;
-    pool.query('INSERT INTO tasks (title, description) VALUES ($1, $2)', [title, desc], (err) => {
-        if (err) return res.status(500).send(err);
+    const task = req.body.task;
+    // Your SQL logic here...
+    db.query(sql, [values], (err, result) => {
+        if (err) throw err;
+        // CHANGE THIS: Instead of res.send(result), use:
         res.redirect('/');
     });
 });
